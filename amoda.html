@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amoda Multicuisine Restaurant &amp; Café — Vijayawada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1c130f;
+    --bg-2: #26180f;
+    --panel: #2c1c14;
+    --cream: #f4e7d3;
+    --cream-dim: #cbb89e;
+    --marigold: #e5a233;
+    --marigold-dim: #b9822c;
+    --chili: #b8402f;
+    --chili-bright: #d84a35;
+    --curry: #5c7248;
+    --line: rgba(244,231,211,0.14);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(229,162,51,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 0%, rgba(184,64,47,0.10), transparent 55%),
+      var(--bg);
+    color:var(--cream);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces', serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--chili);color:var(--cream);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--marigold); outline-offset:3px;}
+
+  /* ---------- decorative dotted spice divider (signature element) ---------- */
+  .spice-trail{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:26px 0; user-select:none;
+  }
+  .spice-trail span{
+    width:7px; height:7px; border-radius:50%;
+    opacity:.8;
+  }
+  .spice-trail span:nth-child(3n){background:var(--marigold);}
+  .spice-trail span:nth-child(3n+1){background:var(--chili);}
+  .spice-trail span:nth-child(3n+2){background:var(--curry);}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 5vw;
+    background:rgba(28,19,15,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; letter-spacing:.02em;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:50%;
+    background:conic-gradient(from 200deg, var(--chili), var(--marigold), var(--curry), var(--chili));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 3px rgba(244,231,211,0.08);
+  }
+  .brand-mark span{font-family:'Fraunces',serif; font-weight:700; font-size:.95rem; color:var(--bg);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .rating-pill{
+    display:flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono',monospace; font-size:.78rem;
+    padding:6px 10px; border:1px solid var(--line); border-radius:999px;
+    color:var(--cream-dim);
+  }
+  .rating-pill b{color:var(--marigold);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:999px; font-weight:600; font-size:.88rem;
+    border:1px solid transparent; cursor:pointer; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--chili); color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(184,64,47,0.35);}
+  .btn-ghost{border-color:var(--line); color:var(--cream);}
+  .btn-ghost:hover{background:rgba(244,231,211,0.06); transform:translateY(-2px);}
+  .nav .btn-ghost{display:none;}
+  @media (min-width:720px){ .nav .btn-ghost{display:inline-flex;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center;
+    padding:9vh 5vw 8vh;
+    max-width:1280px; margin:0 auto;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:6vh;} }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--marigold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:24px; height:1px; background:var(--marigold);}
+  .hero h1{
+    font-size:clamp(3rem, 7vw, 5.4rem); line-height:0.98; font-weight:700; margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{font-style:italic; font-weight:500; color:var(--marigold);}
+  .hero p.lede{
+    max-width:46ch; font-size:1.08rem; color:var(--cream-dim); line-height:1.65; margin:0 0 30px;
+  }
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:34px;}
+  .hero-facts{display:flex; gap:30px; flex-wrap:wrap;}
+  .hero-fact b{display:block; font-family:'Fraunces',serif; font-size:1.6rem; color:var(--marigold);}
+  .hero-fact span{font-size:.8rem; color:var(--cream-dim);}
+
+  /* hero visual: steaming bowl */
+  .hero-visual{position:relative; display:flex; align-items:center; justify-content:center; min-height:360px;}
+  .plate-glow{
+    position:absolute; width:320px; height:320px; border-radius:50%;
+    background:radial-gradient(circle, rgba(229,162,51,0.18), transparent 70%);
+    filter:blur(4px);
+  }
+  .bowl-wrap{position:relative; width:280px;}
+  .steam{position:absolute; left:50%; bottom:78%; width:3px; border-radius:3px; background:rgba(244,231,211,0.35); transform-origin:bottom center;}
+  .steam.s1{height:60px; margin-left:-26px; animation:steam 3.4s ease-in-out infinite;}
+  .steam.s2{height:80px; margin-left:2px; animation:steam 3.8s ease-in-out infinite .4s;}
+  .steam.s3{height:55px; margin-left:26px; animation:steam 3.1s ease-in-out infinite .8s;}
+  @keyframes steam{
+    0%{transform:translateY(0) scaleY(1); opacity:0;}
+    20%{opacity:.6;}
+    50%{transform:translateY(-30px) scaleY(1.25); opacity:.4;}
+    100%{transform:translateY(-70px) scaleY(1.4); opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){ .steam{animation:none; opacity:0;} }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- reviews marquee ---------- */
+  .reviews-band{
+    background:linear-gradient(100deg, var(--chili), #922f22);
+    padding:20px 0; overflow:hidden; position:relative;
+  }
+  .marquee{display:flex; gap:60px; white-space:nowrap; animation:scroll-left 32s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .marquee{animation:none;} }
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .marquee span{font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:#fbe9dd; opacity:.95;}
+  .marquee span b{font-style:normal; color:var(--marigold);}
+
+  /* ---------- section shell ---------- */
+  section.block{max-width:1280px; margin:0 auto; padding:8vh 5vw;}
+  .section-head{display:flex; flex-direction:column; gap:10px; margin-bottom:44px; max-width:640px;}
+  .section-head .eyebrow{margin-bottom:0;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem); margin:0; font-weight:600;}
+  .section-head p{color:var(--cream-dim); margin:0; line-height:1.6;}
+
+  /* ---------- menu ---------- */
+  .veg-toggle{
+    display:inline-flex; align-items:center; gap:10px; margin-top:6px;
+    font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--cream-dim); cursor:pointer;
+    user-select:none;
+  }
+  .switch{width:38px; height:20px; border-radius:999px; background:rgba(244,231,211,0.15); position:relative; transition:background .25s;}
+  .switch::after{content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--cream-dim); transition:transform .25s, background .25s;}
+  .veg-toggle.active .switch{background:var(--curry);}
+  .veg-toggle.active .switch::after{transform:translateX(18px); background:var(--cream);}
+
+  .tabs{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px;}
+  .tab{
+    padding:9px 18px; border-radius:999px; border:1px solid var(--line);
+    font-size:.85rem; font-weight:600; color:var(--cream-dim); cursor:pointer;
+    transition:all .25s ease; background:transparent;
+  }
+  .tab:hover{color:var(--cream); border-color:var(--marigold-dim);}
+  .tab.active{background:var(--marigold); border-color:var(--marigold); color:#231407;}
+
+  .menu-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:14px;
+  }
+  .item-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 18px 16px; position:relative; overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .item-card::before{
+    content:''; position:absolute; inset:0; opacity:0; transition:opacity .3s ease;
+    background:radial-gradient(120px 80px at 100% 0%, rgba(229,162,51,0.16), transparent 70%);
+  }
+  .item-card:hover{transform:translateY(-4px); border-color:var(--marigold-dim); box-shadow:0 14px 30px rgba(0,0,0,0.35);}
+  .item-card:hover::before{opacity:1;}
+  .item-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .item-name{font-weight:600; font-size:.98rem; line-height:1.35;}
+  .veg-dot{
+    flex:none; width:16px; height:16px; border:1.5px solid var(--curry); border-radius:3px;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+  .veg-dot::after{content:''; width:7px; height:7px; border-radius:50%; background:var(--curry);}
+  .veg-dot.nonveg{border-color:var(--chili-bright);}
+  .veg-dot.nonveg::after{background:var(--chili-bright); border-radius:50%;}
+  .item-price{font-family:'JetBrains Mono',monospace; color:var(--marigold); font-weight:600; font-size:.95rem; white-space:nowrap;}
+  .item-note{margin-top:8px; font-size:.78rem; color:var(--cream-dim); font-style:italic;}
+
+  .menu-empty{color:var(--cream-dim); font-size:.9rem; padding:30px 0;}
+
+  /* ---------- visit section ---------- */
+  .visit{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;
+  }
+  @media (max-width:820px){ .visit{grid-template-columns:1fr;} }
+  .info-list{display:flex; flex-direction:column; gap:22px;}
+  .info-row{display:flex; gap:16px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--line);}
+  .info-icon{
+    flex:none; width:40px; height:40px; border-radius:10px; background:rgba(229,162,51,0.12);
+    display:flex; align-items:center; justify-content:center; color:var(--marigold);
+  }
+  .info-row h4{margin:0 0 4px; font-size:.95rem; font-weight:700;}
+  .info-row p{margin:0; color:var(--cream-dim); font-size:.9rem; line-height:1.5;}
+  .visit-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+
+  .quote-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:32px; position:relative;
+  }
+  .quote-card .stars{color:var(--marigold); letter-spacing:3px; font-size:1rem; margin-bottom:16px;}
+  .quote-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.25rem; line-height:1.5; margin:0 0 20px; color:var(--cream);}
+  .quote-card footer{font-size:.85rem; color:var(--cream-dim); font-family:'JetBrains Mono',monospace;}
+
+  /* ---------- footer ---------- */
+  footer.site{
+    padding:40px 5vw; text-align:center; color:var(--cream-dim); font-size:.82rem;
+    border-top:1px solid var(--line);
+  }
+  footer.site .brand{justify-content:center; margin-bottom:10px;}
+
+  @media (max-width:600px){
+    .hero-facts{gap:20px;}
+    section.block{padding:7vh 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="brand">
+    <div class="brand-mark"><span>A</span></div>
+    Amoda
+  </div>
+  <div class="nav-actions">
+    <div class="rating-pill">★ <b>4.9</b> · 74 reviews</div>
+    <a class="btn btn-ghost" href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwiYpqzrlLuVAxUAAAAAHQAAAAAQCQ..i&pvq=Cg0vZy8xMW5qOXM0cjF2IhYKEGFtb2RhIHJlc3RhdXJhbnQQAhgD&lqi=ChBhbW9kYSByZXN0YXVyYW50SLq4iZzBtICACFoiEAAQARgAGAEiEGFtb2RhIHJlc3RhdXJhbnQqBggCEAAQAZIBCnJlc3RhdXJhbnQ&fvr=1&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x3a35efb49024be1b:0xe89da8aa9e7f321d" target="_blank" rel="noopener">Directions</a>
+    <a class="btn btn-primary" href="tel:09088938893">Call to book</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow reveal">Siddhartha Nagar · Vijayawada</div>
+    <h1 class="reveal">Good Food.<br>Good Company.<br><em>Good Times.</em></h1>
+    <p class="lede reveal">A multicuisine restaurant &amp; café serving everything from Andhra classics to Chinese, tandoor and continental favourites — cooked fresh, served warm, and loved by everyone who walks in.</p>
+    <div class="hero-ctas reveal">
+      <a class="btn btn-primary" href="#menu">Explore the menu</a>
+      <a class="btn btn-ghost" href="https://www.eazydiner.com/vijayawada/amoda-multicuisine-restaurant-siddhartha-nagar-vijayawada-714676" target="_blank" rel="noopener">Reserve a table</a>
+    </div>
+    <div class="hero-facts reveal">
+      <div class="hero-fact"><b>4.9★</b><span>74 Google reviews</span></div>
+      <div class="hero-fact"><b>₹200–1,200</b><span>per person</span></div>
+      <div class="hero-fact"><b>Open now</b><span>closes 11 pm</span></div>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="plate-glow"></div>
+    <div class="bowl-wrap">
+      <div class="steam s1"></div><div class="steam s2"></div><div class="steam s3"></div>
+      <svg viewBox="0 0 280 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="140" cy="150" rx="118" ry="20" fill="#000" opacity="0.25"/>
+        <path d="M40 100 Q140 175 240 100 L232 108 Q140 165 48 108 Z" fill="#3a2418"/>
+        <ellipse cx="140" cy="100" rx="100" ry="34" fill="#e5a233"/>
+        <ellipse cx="140" cy="98" rx="86" ry="26" fill="#b8402f"/>
+        <ellipse cx="140" cy="96" rx="70" ry="19" fill="#d8672f"/>
+        <circle cx="112" cy="92" r="4" fill="#5c7248"/>
+        <circle cx="150" cy="88" r="4" fill="#f4e7d3"/>
+        <circle cx="168" cy="98" r="3.5" fill="#5c7248"/>
+        <circle cx="128" cy="100" r="3" fill="#e5a233"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="spice-trail reveal" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="reviews-band">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section class="block" id="menu">
+  <div class="section-head reveal">
+    <div class="eyebrow">The full menu</div>
+    <h2>Ten sections, one thali.</h2>
+    <p>From Andhra-style starters to wok-fired gravies, tandoor classics, biryani and a continental corner for the kids — pick a section below.</p>
+    <div class="veg-toggle" id="vegToggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="switch"></span> Vegetarian only
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<section class="block" id="visit">
+  <div class="section-head reveal">
+    <div class="eyebrow">Visit us</div>
+    <h2>Find your table.</h2>
+  </div>
+  <div class="visit">
+    <div class="info-list reveal">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><h4>Address</h4><p>Door no. 60, 9-10/5, Siddhartha 7th Line, beside Ankura Hospital, near Lalitha Jewellery, Siddhartha Nagar, Vijayawada, Andhra Pradesh 520010</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕚</div>
+        <div><h4>Hours</h4><p>Open daily · Closes 11 pm</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">☎</div>
+        <div><h4>Phone</h4><p>090889 38893</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">₹</div>
+        <div><h4>Cost for two</h4><p>₹200–1,200 per person, reported by 21 diners</p></div>
+      </div>
+      <div class="visit-ctas">
+        <a class="btn btn-primary" href="tel:09088938893">Call restaurant</a>
+        <a class="btn btn-ghost" href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwiYpqzrlLuVAxUAAAAAHQAAAAAQCQ..i&pvq=Cg0vZy8xMW5qOXM0cjF2IhYKEGFtb2RhIHJlc3RhdXJhbnQQAhgD&lqi=ChBhbW9kYSByZXN0YXVyYW50SLq4iZzBtICACFoiEAAQARgAGAEiEGFtb2RhIHJlc3RhdXJhbnQqBggCEAAQAZIBCnJlc3RhdXJhbnQ&fvr=1&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x3a35efb49024be1b:0xe89da8aa9e7f321d" target="_blank" rel="noopener">Get directions</a>
+      </div>
+    </div>
+    <div class="quote-card reveal">
+      <div class="stars">★★★★★</div>
+      <p id="quoteText">"Good food, good service, good ambience."</p>
+      <footer id="quoteAuthor">— Google review</footer>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="brand"><div class="brand-mark"><span>A</span></div>Amoda</div>
+  <p>Amoda Multicuisine Restaurant &amp; Café · Siddhartha Nagar, Vijayawada · 090889 38893</p>
+</footer>
+
+<script>
+// ---------------- Menu data ----------------
+const MENU = {
+  "Starters": [
+    {n:"Chilli Mushroom", p:385, v:1},{n:"Chilli Paneer", p:371, v:1},{n:"Crispy Veg", p:385, v:1},
+    {n:"Kung Pao Paneer", p:385, v:1},{n:"Manchurian 65", p:385, v:1},{n:"Mushroom 65", p:385, v:1},
+    {n:"Paneer 65", p:371, v:1},{n:"Paneer Manchurian", p:385, v:1},{n:"Pepper Paneer", p:397, v:1},
+    {n:"Veg Manchurian", p:371, v:1},{n:"Akbari Paneer Tikka", p:551, v:1},{n:"Hara Bhara Kebab", p:560, v:1},
+    {n:"Makmali Paneer Tikka", p:481, v:1},{n:"Paneer Tikka", p:455, v:1},
+    {n:"Amritsari Fish Tikka", p:551, v:0},{n:"Apollo Fish", p:536, v:0},
+    {n:"Boneless Afghani Kebab", p:523, v:0, note:"8 pieces"},
+    {n:"Boneless Kalmi Kebab", p:659, v:0, note:"4 pieces"},
+    {n:"Boneless Kandari Kebab", p:523, v:0, note:"8 pieces"},
+    {n:"Boneless Malai Kebab", p:523, v:0, note:"8 pieces"},
+    {n:"Boneless Pahadi Kebab", p:523, v:0, note:"8 pieces, pudina"},
+    {n:"Butter Fried Chicken", p:481, v:0},{n:"Chicken Drumsticks", p:426, v:0},
+    {n:"Chicken Ghee Roasted", p:510, v:0},{n:"Chicken Lollipop", p:455, v:0},
+    {n:"Chicken Majestic", p:455, v:0},{n:"Chilli Chicken", p:479, v:0},{n:"Chilli Fish", p:523, v:0},
+    {n:"Egg 65", p:344, v:0},{n:"Egg Manchurian", p:359, v:0},{n:"Egg Roasted", p:343, v:0},
+    {n:"Fried Fish", p:536, v:0},{n:"Ginger Chicken", p:481, v:0},{n:"Kung Pao Chicken", p:498, v:0},
+    {n:"Mutton Roasted", p:634, v:0},{n:"Schezwan Chicken", p:455, v:0},{n:"Special Fried Chicken", p:455, v:0},
+    {n:"Special Mutton Galouti", p:695, v:0},{n:"Special Mutton Seekh Kebab", p:672, v:0},
+    {n:"Talawa Mutton", p:647, v:0},{n:"Tangdi Kebab", p:551, v:0},{n:"Chicken Tikka", p:481, v:0},
+    {n:"Tandoori Chicken", p:409, v:0}
+  ],
+  "Soups": [
+    {n:"Lemon Coriander Soup", p:272, v:1},{n:"Tomato Soup", p:215, v:1},
+    {n:"Veg Hot And Sour Soup", p:215, v:1},{n:"Veg Manchow Lung Fung Soup", p:215, v:1},
+    {n:"Veg Sweet Corn Soup", p:215, v:1},
+    {n:"Non Veg Hot And Sour Soup", p:244, v:0},{n:"Non Veg Lung Fung Soup", p:272, v:0},
+    {n:"Non Veg Manchow Lung Fung Soup", p:244, v:0},{n:"Non Veg Sweet Corn Soup", p:244, v:0}
+  ],
+  "Biryani": [
+    {n:"Veg Biryani", p:371, v:1},{n:"Paneer Tikka Biryani", p:426, v:1},
+    {n:"Chicken Dum Biryani", p:442, v:0},{n:"Chicken Fried Biryani", p:468, v:0},
+    {n:"Chicken Ghee Roasted Biryani", p:539, v:0},{n:"Chicken Lollipop Biryani", p:482, v:0},
+    {n:"Chicken Tikka Biryani", p:482, v:0},{n:"Chicken Rambo Biryani", p:624, v:0},
+    {n:"Special Chicken Biryani", p:523, v:0},{n:"Ulavacharu Chicken Biryani", p:659, v:0},
+    {n:"Prawns Biryani", p:619, v:0},{n:"Mutton Dum Biryani", p:635, v:0},
+    {n:"Mutton Fried Piece Biryani", p:661, v:0},{n:"Mutton Raan Biryani", p:719, v:0},
+    {n:"Shahi Gosht Biryani", p:732, v:0}
+  ],
+  "Main Course": [
+    {n:"Dal Tadka", p:318, v:1},{n:"Kadhai Paneer", p:428, v:1},{n:"Kadhai Vegetable", p:400, v:1},
+    {n:"Kaju Paneer", p:469, v:1},{n:"Mushroom Masala", p:414, v:1},{n:"Palak Paneer", p:421, v:1},
+    {n:"Paneer Butter Masala", p:428, v:1},{n:"Paneer Shahi Korma", p:414, v:1},
+    {n:"Veg Angara", p:482, v:1},{n:"Veg Chatpata", p:386, v:1},{n:"Veg Kolhapuri", p:414, v:1},
+    {n:"Andhra Chicken", p:509, v:0},{n:"Butter Chicken", p:481, v:0},{n:"Butter Egg", p:275, v:0},
+    {n:"Chicken Tikka Masala", p:496, v:0},{n:"Dhaba Style Egg Bhurji", p:260, v:0},
+    {n:"Egg Curry", p:260, v:0},{n:"Egg Masala", p:260, v:0},
+    {n:"Fish Curry", p:578, v:0, note:"Chepala pulusu"},{n:"Fish Masala", p:577, v:0},
+    {n:"Kadhai Chicken", p:481, v:0},{n:"Kadhai Mutton", p:634, v:0},{n:"Kadhai Prawns", p:578, v:0},
+    {n:"Mughlai Chicken", p:509, v:0},{n:"Mutton Masala", p:619, v:0},{n:"Mutton Rogan Josh", p:634, v:0},
+    {n:"Mutton Shahi Korma", p:661, v:0},{n:"Prawns Masala", p:578, v:0},{n:"Punjabi Chicken", p:497, v:0}
+  ],
+  "Chinese Gravies": [
+    {n:"Ginger Chicken Gravy", p:455, v:0},{n:"Ginger Fish Gravy", p:539, v:0},{n:"Ginger Prawns Gravy", p:563, v:0},
+    {n:"Hot Garlic Chicken Gravy", p:455, v:0},{n:"Hot Garlic Fish Gravy", p:539, v:0},{n:"Hot Garlic Prawns Gravy", p:563, v:0},
+    {n:"Oyster Sauce Chicken Gravy", p:443, v:0},{n:"Oyster Sauce Fish Gravy", p:539, v:0},{n:"Oyster Sauce Prawns Gravy", p:563, v:0},
+    {n:"Schezwan Chicken Gravy", p:455, v:0},{n:"Schezwan Fish Gravy", p:539, v:0},{n:"Schezwan Prawns Gravy", p:563, v:0}
+  ],
+  "Combos": [
+    {n:"Crispy Corn And Chilli Mushroom Combo", p:816, v:1},
+    {n:"Veg Manchuria And Paneer Manchuria Combo", p:840, v:1},
+    {n:"Apollo Fish And Chilli Prawns Combo", p:1080, v:0},
+    {n:"Garlic Prawns And Apollo Fish Combo", p:1116, v:0},
+    {n:"Loose Prawns And Chilli Fish Combo", p:1116, v:0}
+  ],
+  "Minis": [
+    {n:"Veg Fried Rice With Veg Manchuria", p:270, v:1, note:"500ml + 250ml"},
+    {n:"Paneer Tikka Biryani (Mini)", p:270, v:1, note:"700ml"},
+    {n:"4 Phulka With Chicken Curry", p:300, v:0, note:"250ml curry"},
+    {n:"Chicken Dum Biryani (Mini)", p:270, v:0, note:"700ml"},
+    {n:"Chicken Fry Biryani (Mini)", p:270, v:0, note:"700ml"},
+    {n:"Chicken Lollipop Biryani (Mini)", p:270, v:0, note:"700ml"},
+    {n:"Egg Fried Rice With Chicken Manchurian", p:300, v:0, note:"500ml + 250ml"},
+    {n:"Egg Fried Rice With Chilli Chicken", p:300, v:0, note:"500ml + 250ml"}
+  ],
+  "Pizza & Pasta": [
+    {n:"Margherita Pizza", p:227, v:1},{n:"Quattro Stagioni Mix Pizza", p:359, v:1},
+    {n:"Fettuccine Alfredo Pasta", p:419, v:1},{n:"Penne Pasta", p:443, v:1},
+    {n:"Spaghetti Cheese Bolognese Veg", p:431, v:1},{n:"Veg Farfalle Pasta", p:395, v:1},
+    {n:"Veg Fusilli Pasta", p:395, v:1},
+    {n:"Marinara Prawns Pizza", p:275, v:0},{n:"Amoda Special Chicken Pizza", p:467, v:0},
+    {n:"Con Pollo Pizza", p:239, v:0},{n:"Non Veg Farfalle Pasta", p:431, v:0},
+    {n:"Non Veg Fusilli Pasta", p:431, v:0},{n:"Non Veg Spaghetti Cheese Bolognese", p:479, v:0}
+  ],
+  "Burgers & Sandwiches": [
+    {n:"Aloo Tikki Burger", p:287, v:1},{n:"Crispy Paneer Burger", p:263, v:1},
+    {n:"Grilled Paneer Burger", p:335, v:1},{n:"Mushroom Swiss Burger", p:347, v:1},
+    {n:"Veg Burger", p:251, v:1},{n:"Veg Paneer Burger", p:299, v:1},
+    {n:"Cheese Stuffed Chicken Burger", p:479, v:0},{n:"Crunchy Fried Chicken Burger", p:383, v:0},
+    {n:"Mutton Burger", p:479, v:0},{n:"Amoda Wrap Sandwich Chicken", p:347, v:0}
+  ],
+  "Breads & Sides": [
+    {n:"Phulka", p:30, v:1},{n:"Roti", p:30, v:1},{n:"Butter Roti", p:42, v:1},
+    {n:"Plain Naan", p:47, v:1},{n:"Butter Naan", p:66, v:1},{n:"Plain Kulcha", p:66, v:1},
+    {n:"Garlic Naan", p:78, v:1},{n:"Masala Kulcha", p:78, v:1},
+    {n:"Crispy Corn", p:359, v:1},{n:"Finger Chips", p:359, v:1},
+    {n:"Masala Papad", p:162, v:1, note:"2 pieces"},
+    {n:"Keema Naan", p:150, v:0, note:"non-veg preparation"}
+  ]
+};
+
+const CATS = Object.keys(MENU);
+let activeCat = CATS[0];
+let vegOnly = false;
+
+const tabsEl = document.getElementById('tabs');
+const gridEl = document.getElementById('menuGrid');
+
+function renderTabs(){
+  tabsEl.innerHTML = CATS.map(c =>
+    `<button class="tab ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  tabsEl.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ activeCat = btn.dataset.cat; renderTabs(); renderGrid(); });
+  });
+}
+
+function renderGrid(){
+  const items = MENU[activeCat].filter(it => !vegOnly || it.v);
+  if(!items.length){
+    gridEl.innerHTML = `<div class="menu-empty">No vegetarian items in this section — try another tab.</div>`;
+    return;
+  }
+  gridEl.innerHTML = items.map(it => `
+    <div class="item-card">
+      <div class="item-top">
+        <span class="item-name">${it.n}</span>
+        <span class="veg-dot ${it.v ? '' : 'nonveg'}"></span>
+      </div>
+      <div class="item-price">₹${it.p.toFixed(2)}</div>
+      ${it.note ? `<div class="item-note">${it.note}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+renderTabs();
+renderGrid();
+
+const vegToggle = document.getElementById('vegToggle');
+function toggleVeg(){
+  vegOnly = !vegOnly;
+  vegToggle.classList.toggle('active', vegOnly);
+  vegToggle.setAttribute('aria-checked', String(vegOnly));
+  renderGrid();
+}
+vegToggle.addEventListener('click', toggleVeg);
+vegToggle.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleVeg(); } });
+
+// ---------------- Reviews marquee ----------------
+const REVIEWS = [
+  {q:"Good food, good service, good ambience.", a:"Google review"},
+  {q:"Tastes good — peach mocktail and Irish cappuccino, chicken majestic was a nice one.", a:"Google review"},
+  {q:"Friendly staff, awesome food.", a:"Google review"},
+  {q:"Diners recommend the garlic fish and chicken ghee roast.", a:"Google review"},
+  {q:"Staff are friendly and polite, providing excellent service.", a:"Google review"}
+];
+const marqueeEl = document.getElementById('marquee');
+const marqueeItems = [...REVIEWS, ...REVIEWS].map(r => `<span>"${r.q}" <b>— ${r.a}</b></span>`).join('');
+marqueeEl.innerHTML = marqueeItems;
+
+// rotate quote card
+let qi = 0;
+const quoteText = document.getElementById('quoteText');
+const quoteAuthor = document.getElementById('quoteAuthor');
+setInterval(()=>{
+  qi = (qi+1) % REVIEWS.length;
+  quoteText.style.opacity = 0;
+  quoteAuthor.style.opacity = 0;
+  setTimeout(()=>{
+    quoteText.textContent = `"${REVIEWS[qi].q}"`;
+    quoteAuthor.textContent = `— ${REVIEWS[qi].a}`;
+    quoteText.style.transition = 'opacity .4s ease';
+    quoteAuthor.style.transition = 'opacity .4s ease';
+    quoteText.style.opacity = 1;
+    quoteAuthor.style.opacity = 1;
+  }, 400);
+}, 4500);
+
+// ---------------- Scroll reveal ----------------
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
